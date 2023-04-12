@@ -62,7 +62,10 @@ setBackgroundColor = (id) => {
 };
 
 getFavorites = () => {
-  const localstrg = localStorage.getItem("favorites");
+  let localstrg = localStorage.getItem("favorites");
+  if (localstrg === null) {
+    localstrg = "";
+  }
   let favorites =
     localstrg !== ""
       ? localStorage.getItem("favorites").split`,`.map((x) => +x)
@@ -90,6 +93,5 @@ allItems.forEach((item) => {
   });
 });
 
-localStorage.setItem("favorites", ""); //initialize favorites key
 initializeBackgroundColor();
 
