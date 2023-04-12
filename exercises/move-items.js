@@ -46,16 +46,13 @@ const favs = document.getElementById("favs");
 // Your code goes here
 updateCollections = (id, direction) => {
   const child = document.getElementById(id);
+  const icons = ["fa-heart-crack", "fa-heart-circle-plus"];
+  const params =
+    direction === "toMain" ? [main, icons] : [favs, icons.reverse()];
 
-  if (direction === "toMain") {
-    main.appendChild(child);
-    child.children[0].classList.remove("fa-heart-crack");
-    child.children[0].classList.add("fa-heart-circle-plus");
-  } else {
-    favs.appendChild(child);
-    child.children[0].classList.remove("fa-heart-circle-plus");
-    child.children[0].classList.add("fa-heart-crack");
-  }
+  params[0].appendChild(child);
+  child.children[0].classList.remove(params[1][0]);
+  child.children[0].classList.add(params[1][1]);
 };
 
 /**
