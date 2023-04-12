@@ -86,12 +86,15 @@ deleteToFavorites = (id) => {
   localStorage.setItem("favorites", favorites);
 };
 
-allItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    const isFav = setBackgroundColor(item.id);
-    isFav === "true" ? addToFavorites(item.id) : deleteToFavorites(item.id);
-  });
-});
+const callbackFn = (e) => {
+  const item = e.target;
+  const isFav = setBackgroundColor(item.id);
+  isFav === "true" ? addToFavorites(item.id) : deleteToFavorites(item.id);
+};
+
+
+const container = document.getElementsByClassName('cardsContainer')[0];
+container.addEventListener('click', callbackFn);
 
 initializeBackgroundColor();
 
