@@ -38,3 +38,60 @@
  */
 
 // Your code goes here...
+const allItems = document.querySelectorAll(".card");
+
+initializeBackgroundColor = () => {
+  const favorites = getFavorites();
+
+  favorites.forEach((id) => {
+    document.getElementById(id).dataset.fav = "true";
+    document.getElementById(id).classList.add("red");
+  });
+};
+
+setBackgroundColor = (id) => {
+  const el = document.getElementById(id);
+  if (el.dataset.fav === "false") {
+    el.dataset.fav = "true";
+    el.classList.add("red");
+  } else {
+    el.dataset.fav = "false";
+    el.classList.remove("red");
+  }
+
+  return el.dataset.fav;
+};
+
+getFavorites = () => {
+  let localstrg = localStorage.getItem("favorites");
+  if (localstrg === null) {
+    localstrg = "";
+  }
+  let favorites =
+    localstrg !== ""
+      ? localStorage.getItem("favorites").split`,`.map((x) => +x)
+      : [];
+
+  return favorites;
+};
+addToFavorites = (id) => {
+  const favorites = getFavorites();
+  favorites.push(id);
+  localStorage.setItem("favorites", favorites.join(","));
+};
+
+deleteToFavorites = (id) => {
+  const favorites = getFavorites();
+  const index = favorites.indexOf(Number(id));
+  favorites.splice(index, 1);
+  localStorage.setItem("favorites", favorites);
+};
+
+allItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    const isFav = setBackgroundColor(item.id);
+    isFav === "true" ? addToFavorites(item.id) : deleteToFavorites(item.id);
+  });
+});
+
+initializeBackgroundColor();
