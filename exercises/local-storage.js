@@ -38,7 +38,6 @@
  */
 
 // Your code goes here...
-const allItems = document.querySelectorAll(".card");
 
 initializeBackgroundColor = () => {
   const favorites = getFavorites();
