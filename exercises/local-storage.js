@@ -42,7 +42,6 @@ const allItems = document.querySelectorAll(".card");
 
 initializeBackgroundColor = () => {
   const favorites = getFavorites();
-
   favorites.forEach((id) => {
     document.getElementById(id).dataset.fav = "true";
     document.getElementById(id).classList.add("red");
@@ -63,10 +62,7 @@ setBackgroundColor = (id) => {
 };
 
 getFavorites = () => {
-  let localstrg = localStorage.getItem("favorites");
-  if (localstrg === null) {
-    localstrg = "";
-  }
+  const localstrg = localStorage.getItem("favorites");
   let favorites =
     localstrg !== ""
       ? localStorage.getItem("favorites").split`,`.map((x) => +x)
@@ -94,4 +90,6 @@ allItems.forEach((item) => {
   });
 });
 
+localStorage.setItem("favorites", ""); //initialize favorites key
 initializeBackgroundColor();
+
