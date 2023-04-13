@@ -78,7 +78,7 @@ addToFavorites = (id) => {
   localStorage.setItem("favorites", favorites.join(","));
 };
 
-deleteToFavorites = (id) => {
+deleteFromFavorites = (id) => {
   const favorites = getFavorites();
   const index = favorites.indexOf(Number(id));
   favorites.splice(index, 1);
@@ -88,7 +88,7 @@ deleteToFavorites = (id) => {
 const callbackFn = (e) => {
   const item = e.target;
   const isFav = setBackgroundColor(item.id);
-  isFav === "true" ? addToFavorites(item.id) : deleteToFavorites(item.id);
+  isFav === "true" ? addToFavorites(item.id) : deleteFromFavorites(item.id);
 };
 
 
